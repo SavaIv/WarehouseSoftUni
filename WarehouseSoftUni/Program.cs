@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Warehouse.Core.Constants;
-using WarehouseSoftUni.Data;
+using Warehouse.Infrastructure.Data;
 using WarehouseSoftUni.ModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);
