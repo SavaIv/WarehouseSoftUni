@@ -40,5 +40,7 @@ namespace Warehouse.Infrastructure.Data
         public Category Category { get; set; }
 
         public IList<Rack> Racks { get; set; } = new List<Rack>();
+
+        public IList<DealSubject> DealSubjects { get; set; } = new List<DealSubject>();
     }
 }
