@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Warehouse.Infrastructure.Data
 {
@@ -26,9 +22,11 @@ namespace Warehouse.Infrastructure.Data
         public string? Description { get; set; }
         
         [Required]
-        public DateOnly DateFrom { get; set; } = DateOnly.FromDateTime(DateTime.Today);
+        [Column(TypeName = "date")]
+        public DateTime DateFrom { get; set; } = DateTime.Today;
 
-        public DateOnly? DateTo { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? DateTo { get; set; }
 
         public ICollection<Item> Items { get; set; } = new List<Item>();
     }

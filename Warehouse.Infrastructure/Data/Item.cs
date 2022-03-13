@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Warehouse.Infrastructure.Data
 {
@@ -12,6 +7,10 @@ namespace Warehouse.Infrastructure.Data
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
+
+        [Required]
+        [StringLength(30)]
+        public string Barcode { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -27,9 +26,11 @@ namespace Warehouse.Infrastructure.Data
         public string? Description { get; set; }
 
         [Required]
-        public DateOnly DateFrom { get; set; } = DateOnly.FromDateTime(DateTime.Today);
+        [Column(TypeName = "date")]
+        public DateTime DateFrom { get; set; } = DateTime.Today;
 
-        public DateOnly? DateTo { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? DateTo { get; set; }
 
         [Required]
         public Guid CategoryId { get; set; }
@@ -38,6 +39,6 @@ namespace Warehouse.Infrastructure.Data
         [ForeignKey(nameof(CategoryId))]
         public Category Category { get; set; }
 
-
+        public IList<Rack> Racks { get; set; } = new List<Rack>();
     }
 }
