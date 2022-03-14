@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Warehouse.Core.Constants;
 using Warehouse.Infrastructure.Data;
 using WarehouseSoftUni.ModelBinders;
+using Warehouse.Infrastructure.Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddControllersWithViews()
         options.ModelBinderProviders.Insert(1, new DateTimeModelBinderProvider(FormatingConstant.NormalDateFormat));
         options.ModelBinderProviders.Insert(2, new DoubleModelBinderProvider());
     });
+
+builder.Services.AddScoped<IApplicatioDbRepository, ApplicatioDbRepository>();
 
 var app = builder.Build();
 
