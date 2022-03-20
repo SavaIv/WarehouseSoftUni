@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Warehouse.Core.Constants;
 using Warehouse.Infrastructure.Data;
+using Warehouse.Infrastructure.Data.Identity;
 using WarehouseSoftUni.ModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddApplicationDbContexts(builder.Configuration);
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    // options.User.AllowedUserNameCharacters = new[] { }  // can be put all cirilic chars
+
+})
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews()
