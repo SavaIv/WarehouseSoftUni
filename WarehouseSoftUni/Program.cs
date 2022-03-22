@@ -19,7 +19,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     // options.User.AllowedUserNameCharacters = new[] { }  // can be put all cirilic chars
 
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+    
 
 builder.Services.AddAuthentication()
     .AddFacebook(options =>
@@ -64,6 +66,9 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapControllerRoute(
+    name: "Area",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
