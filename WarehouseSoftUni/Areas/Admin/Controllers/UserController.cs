@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Warehouse.Core.Constants;
 using Warehouse.Core.Contracts;
 using Warehouse.Core.Models;
@@ -95,10 +96,10 @@ namespace WarehouseSoftUni.Areas.Admin.Controllers
 
         public async Task<IActionResult> CreateRole()
         {
-            //await roleManager.CreateAsync(new IdentityRole()
-            //{
-            //    Name = "HouseKeeper"
-            //});
+            await roleManager.CreateAsync(new IdentityRole()
+            {
+                Name = "HouseKeeper"
+            });
 
             return Ok();
         }
