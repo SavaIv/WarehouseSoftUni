@@ -54,18 +54,27 @@ namespace WarehouseSoftUni.Areas.Admin.Controllers
                 .Select(r => new SelectListItem()
                 {
                     Text = r.Name,
-                    Value = r.Id,
+                    Value = r.Name,
                     Selected = userManager.IsInRoleAsync(user, r.Name).Result
                 }).ToList();
 
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Roles(UserRolesViewModel model)
-        //{
-        //    return Ok(model);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Roles(UserRolesViewModel model)
+        {
+            var user = await service.GetUserById(model.UserId);
+            var userRoles = await userManager.GetRolesAsync(user);
+            await userManager.RemoveFromRolesAsync(user, userRoles);
+
+            if (model.RoleNames?.Length > 0)
+            {
+                await userManager.AddToRolesAsync(user, model.RoleNames);
+            }
+
+            return RedirectToAction(nameof(ManageUsers));
+        }
 
         public async Task<IActionResult> Edit(string id)
         {
