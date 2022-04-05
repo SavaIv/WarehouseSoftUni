@@ -16,7 +16,9 @@ namespace WarehouseSoftUni.Controllers
 
         public IActionResult Index()
         {
-            ViewData[MessageConstant.SuccessMessage] = "Всичко е ОК. Продължавай нататък.";
+            // This is toastr:
+            //ViewData[MessageConstant.SuccessMessage] = "Всичко е ОК. Продължавай нататък.";
+                       
 
             return View();
         }
