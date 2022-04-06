@@ -29,6 +29,18 @@ namespace Warehouse.Test
                 .BuildServiceProvider();
 
             var repo = serviceProvider.GetService<IApplicatioDbRepository>();
+
+            // -> MOVED TO SeedDbAsync(repo) <-
+            //var customer = new Contragent()
+            //{
+            //    CustomerNumber = "myTestNumber",
+            //    Name = "Pesho"
+            //};  
+
+            //await repo.AddAsync(customer);
+            //await repo.SaveChangesAsync();
+
+
             await SeedDbAsync(repo);
         }
 
@@ -114,29 +126,29 @@ namespace Warehouse.Test
                 Name = "Pesho"
             };
 
-            //var item = new Item()
-            //{
-            //    Barcode = "1234567890",
-            //    Category = new Category()
-            //    {
-            //        DateFrom = DateTime.Now,
-            //        Label = "Computers"
-            //    },
-            //    DateFrom = DateTime.Now,
-            //    Label = "Laptop",
-            //    Racks = new List<Rack>()
-            //    {
-            //        new Rack()
-            //        {
-            //            ItemsCount = 5,
-            //            Number = "24",
-            //            Section = "3C",
-            //            IsInUse = true
-            //        }
-            //    }
-            //};
+            var item = new Item()
+            {
+                Barcode = "1234567890",
+                Category = new Category()
+                {
+                    DateFrom = DateTime.Now,
+                    Lable = "Computers"
+                },
+                DateFrom = DateTime.Now,
+                Lable = "Laptop",
+                Racks = new List<Rack>()
+                {
+                    new Rack()
+                    {
+                        ItemsCount = 5,
+                        Number = "24",
+                        Section = "3C",
+                        IsInUse = true
+                    }
+                }
+            };
 
-            //await repo.AddAsync(item);
+            await repo.AddAsync(item);
             await repo.AddAsync(customer);
             await repo.SaveChangesAsync();
         }
