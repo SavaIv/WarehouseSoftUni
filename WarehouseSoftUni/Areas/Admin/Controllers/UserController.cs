@@ -51,6 +51,7 @@ namespace WarehouseSoftUni.Areas.Admin.Controllers
 
             ViewBag.RoleItems = roleManager.Roles
                 .ToList()
+                //.Where()  <-- ako iskame da vidim samo opredeleni ne6ta
                 .Select(r => new SelectListItem()
                 {
                     Text = r.Name,
